@@ -1,8 +1,8 @@
 sitemap-generator
 =================
 
-[![GoDoc](https://godoc.org/github.com/sabloger/sitemap-generator?status.svg)](https://godoc.org/github.com/sabloger/sitemap-generator)
-[![Go Report Card](https://goreportcard.com/badge/github.com/sabloger/sitemap-generator)](https://goreportcard.com/report/github.com/sabloger/sitemap-generator)
+[![GoDoc](https://godoc.org/github.com/alikethunder/sitemap-generator?status.svg)](https://godoc.org/github.com/alikethunder/sitemap-generator)
+[![Go Report Card](https://goreportcard.com/badge/github.com/alikethunder/sitemap-generator)](https://goreportcard.com/report/github.com/alikethunder/sitemap-generator)
 
 A high-performance sitemap-generator Go module which is a comprehensive tool to create
 and manage sitemap_index and sitemap files in a beautiful way. :)
@@ -12,7 +12,7 @@ Please see http://www.sitemaps.org/ for description of sitemap contents.
 ## Installation
 Use `go get`:
 
-`go get github.com/sabloger/sitemap-generator`
+`go get github.com/alikethunder/sitemap-generator`
 
 # How to Use sitemap-generator
 
@@ -25,7 +25,7 @@ package main
 
 import (
   "fmt"
-  "github.com/sabloger/sitemap-generator/smg"
+  "github.com/alikethunder/sitemap-generator/smg"
   "log"
   "time"
 )
@@ -89,7 +89,7 @@ package main
 
 import (
   "fmt"
-  "github.com/sabloger/sitemap-generator/smg"
+  "github.com/alikethunder/sitemap-generator/smg"
   "log"
   "time"
 )
@@ -202,10 +202,10 @@ n, err = sm.WriteTo(&buf)
 
 ## LINKS
 GoDoc documentation:
-https://pkg.go.dev/github.com/sabloger/sitemap-generator
+https://pkg.go.dev/github.com/alikethunder/sitemap-generator
 
 Git repository:
-https://github.com/sabloger/sitemap-generator
+https://github.com/alikethunder/sitemap-generator
 
 
 ## License
