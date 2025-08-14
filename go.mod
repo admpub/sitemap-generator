@@ -1,4 +1,4 @@
-module github.com/alikethunder/sitemap-generator
+module github.com/admpub/sitemap-generator
 
 go 1.16
 
