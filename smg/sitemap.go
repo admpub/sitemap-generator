@@ -95,22 +95,19 @@ func (s *Sitemap) realAdd(u *SitemapLoc, locN int, locBytes []byte) error {
 		return s.NextSitemap.realAdd(u, locN, locBytes)
 	}
 
+	output, err := url.Parse(s.Hostname)
+	if err != nil {
+		return err
+	}
 	if len(u.Images) > 0 {
 		for _, image := range u.Images {
-			output, err := url.Parse(s.Hostname)
-			if err != nil {
-				return err
-			}
-			output.Path = path.Join(output.Path, image.ImageLoc)
-			image.ImageLoc = output.String()
+			cloned := *output
+			cloned.Path = path.Join(output.Path, image.ImageLoc)
+			image.ImageLoc = cloned.String()
 		}
 	}
 
 	if locBytes == nil {
-		output, err := url.Parse(s.Hostname)
-		if err != nil {
-			return err
-		}
 		loc, err := url.Parse(u.Loc)
 		if err != nil {
 			return err
@@ -127,7 +124,7 @@ func (s *Sitemap) realAdd(u *SitemapLoc, locN int, locBytes []byte) error {
 		return s.NextSitemap.realAdd(u, locN, locBytes)
 	}
 
-	_, err := s.content.Write(locBytes)
+	_, err = s.content.Write(locBytes)
 	if err != nil {
 		return err
 	}

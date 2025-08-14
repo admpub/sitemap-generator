@@ -12,7 +12,7 @@ Please see http://www.sitemaps.org/ for description of sitemap contents.
 ## Installation
 Use `go get`:
 
-`go get github.com/alikethunder/sitemap-generator`
+`go get github.com/admpub/sitemap-generator`
 
 # How to Use sitemap-generator
 
@@ -25,7 +25,7 @@ package main
 
 import (
   "fmt"
-  "github.com/alikethunder/sitemap-generator/smg"
+  "github.com/admpub/sitemap-generator/smg"
   "log"
   "time"
 )
