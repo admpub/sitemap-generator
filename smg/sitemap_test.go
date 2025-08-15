@@ -90,7 +90,7 @@ func TestSitemapAdd(t *testing.T) {
 	path := t.TempDir()
 	testLocation := "/test?foo=bar"
 	testImage := "/path-to-image.jpg"
-	testImage2 := "/path-to-image-2.jpg"
+	testImage2 := "path-to-image-2.jpg"
 	testImageAbs := "http://127.0.0.1/path-to-image-abs.jpg"
 	testAlternate1 := &SitemapAlternateLoc{
 		Hreflang: "en",
@@ -124,7 +124,7 @@ func TestSitemapAdd(t *testing.T) {
 	}
 	expectedUrl := fmt.Sprintf("%s%s", baseURL, testLocation)
 	expectedImage := fmt.Sprintf("%s%s", baseURL, testImage)
-	expectedImage2 := fmt.Sprintf("%s%s", baseURL, testImage2)
+	expectedImage2 := fmt.Sprintf("%s/%s", baseURL, testImage2)
 	filepath, err := sm.Save()
 	if err != nil {
 		t.Fatal("Unable to Save Sitemap:", err)
