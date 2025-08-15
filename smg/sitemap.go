@@ -7,6 +7,7 @@ import (
 	"io"
 	"net/url"
 	"path"
+	"strings"
 	"time"
 )
 
@@ -101,6 +102,9 @@ func (s *Sitemap) realAdd(u *SitemapLoc, locN int, locBytes []byte) error {
 	}
 	if len(u.Images) > 0 {
 		for _, image := range u.Images {
+			if len(image.ImageLoc) == 0 || strings.Contains(image.ImageLoc, `://`) {
+				continue
+			}
 			cloned := *output
 			cloned.Path = path.Join(output.Path, image.ImageLoc)
 			image.ImageLoc = cloned.String()

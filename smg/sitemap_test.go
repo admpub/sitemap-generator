@@ -2,6 +2,7 @@ package smg
 
 import (
 	"bytes"
+	"encoding/json"
 	"encoding/xml"
 	"fmt"
 	"io"
@@ -24,7 +25,7 @@ type UrlData struct {
 	ChangeFreq string                 `xml:"changefreq"`
 	Priority   string                 `xml:"priority"`
 	Images     []SitemapImageData     `xml:"image"`
-	Alternate  []SitemapAlternateData `xml:"xhtml link"`
+	Alternate  []SitemapAlternateData `xml:"link"`
 }
 
 type SitemapImageData struct {
@@ -90,6 +91,7 @@ func TestSitemapAdd(t *testing.T) {
 	testLocation := "/test?foo=bar"
 	testImage := "/path-to-image.jpg"
 	testImage2 := "/path-to-image-2.jpg"
+	testImageAbs := "http://127.0.0.1/path-to-image-abs.jpg"
 	testAlternate1 := &SitemapAlternateLoc{
 		Hreflang: "en",
 		Href:     fmt.Sprintf("%s%s", baseURL, "/en/test"),
@@ -114,7 +116,7 @@ func TestSitemapAdd(t *testing.T) {
 		LastMod:    &now,
 		ChangeFreq: Always,
 		Priority:   0.4,
-		Images:     []*SitemapImage{{testImage}, {testImage2}},
+		Images:     []*SitemapImage{{testImage}, {testImage2}, {testImageAbs}},
 		Alternate:  []*SitemapAlternateLoc{testAlternate1, testAlternate2},
 	})
 	if err != nil {
@@ -139,6 +141,11 @@ func TestSitemapAdd(t *testing.T) {
 	if err != nil {
 		t.Fatal("Unable to unmarhsall sitemap byte array into xml: ", err)
 	}
+	t.Logf(`xmlFile XML: %s`, byteValue)
+
+	b, _ := json.MarshalIndent(urlSet, ``, `  `)
+	t.Logf(`xmlFile JSON: %s`, b)
+
 	actualUrl := urlSet.Urls[0].Loc
 	assert.Equal(t, expectedUrl, actualUrl)
 
@@ -147,6 +154,9 @@ func TestSitemapAdd(t *testing.T) {
 
 	actualImage2 := urlSet.Urls[0].Images[1].ImageLoc
 	assert.Equal(t, expectedImage2, actualImage2)
+
+	actualImageAbs := urlSet.Urls[0].Images[2].ImageLoc
+	assert.Equal(t, testImageAbs, actualImageAbs)
 
 	for i, expAlter := range []*SitemapAlternateLoc{testAlternate1, testAlternate2} {
 		actualAlternate := urlSet.Urls[0].Alternate[i].Href
